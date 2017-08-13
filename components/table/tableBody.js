@@ -119,12 +119,19 @@ class TableBody extends Component {
     render () {
         let {columns,rowSelection}=this.props;
         return (
-            <table className="y-table">
-                <Columns columns={columns} rowSelection={rowSelection}/>
-                <tbody className="y-tbody">
-                    {this.renderTableBody()}
-                </tbody>
-            </table>
+            <div>
+                    <Columns columns={columns} rowSelection={rowSelection}/>
+                    <div>
+                        <table className="y-table">
+                            
+                            
+                                <tbody className="y-tbody">
+                                    {this.renderTableBody()}
+                                </tbody>
+                            
+                        </table>
+                    </div>
+            </div>
         )
     }
 }

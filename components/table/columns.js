@@ -28,11 +28,15 @@ class Columns extends Component {
     }
     render () {
         return (
-            <thead className="y-thead">
-                <tr>
-                    {this.setThead()}
-                </tr>
-            </thead>
+            <div>
+                <table className="column-tb">
+                    <thead className="y-thead">
+                        <tr>
+                            {this.setThead()}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         )
     }
 }

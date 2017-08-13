@@ -29,3 +29,8 @@
 .y-tbody tr:hover{
     background: #eaf1f7;
 }
+
+.column-tb{
+    width:100%;
+    border-spacing: 0;
+}

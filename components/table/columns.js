@@ -3,6 +3,8 @@ import React, { Component } from 'react'
     columns
     dataSource
 */
+import  style from './index.css';
+
 class Columns extends Component {
     constructor (props, context) {
         super(props, context)
@@ -28,7 +30,7 @@ class Columns extends Component {
     }
     render () {
         return (
-            <div>
+            <div className={style.col1}>
                 <table className="column-tb">
                     <thead className="y-thead">
                         <tr>

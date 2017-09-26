@@ -1,0 +1,25 @@
+.y-con{
+    display: inline-block;
+    position: relative;
+    width:100%;
+    min-height: 20px;
+}
+.y-uls{
+    list-style: none;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid gray;
+}
+
+.y-uls li{
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+}
+
+.y-uls li:hover{
+    background-color: #ABD4AB;
+}

@@ -16,7 +16,9 @@
     "url": "https://github.com/coderyyx/reactWebComponents/issues"
   },
   "homepage": "https://github.com/coderyyx/reactWebComponents#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "antd": "^1.0.0"
+  },
   "dependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.10.4",

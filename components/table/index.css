@@ -1,0 +1,15 @@
+
+    .col1{
+        width: 10%;
+    }
+    .col2{
+        width: 20%;
+    }
+
+/* :local(.col1){
+    width: 10%;
+}
+
+:global(.col1){
+    width: 10%;
+} */

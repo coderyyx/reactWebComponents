@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Table from './components/table/index.js';
-import {PullSelect,Option} from './components/pullSelect/index.js';
+import Select,{Option} from './components/rc-select/index.js';
+// import {PullSelect,Option} from './components/pullSelect/index.js';
 
 require('./components/style/index.css');
-
+import './components/style/select.less';
 // class Root extends Component {
 //     constructor (props, context) {
 //         super(props, context)
@@ -51,6 +52,30 @@ require('./components/style/index.css');
 // }
 
 
+// class Root extends Component {
+//     onChange(value){
+//         console.log(value)
+//     }
+    
+//     render () {
+//         let pullSelect_props={
+//             value:"杨运心",
+//             onChange:(value)=>this.onChange(value),
+//             conHeight:30,
+//             noReturn:false,
+//             defautText:'其它操作...'
+//         }
+//         return (
+//             <div>
+//                 <PullSelect {...pullSelect_props}>
+//                     <Option eq="1" value="1">y</Option>
+//                     <Option eq="2" value="2">x</Option>
+//                 </PullSelect>
+//             </div>
+//         )
+//     }
+// }
+
 class Root extends Component {
     onChange(value){
         console.log(value)
@@ -65,11 +90,11 @@ class Root extends Component {
             defautText:'其它操作...'
         }
         return (
-            <div>
-                <PullSelect {...pullSelect_props}>
-                    <Option eq="1" value="1">y</Option>
-                    <Option eq="2" value="2">x</Option>
-                </PullSelect>
+            <div style={{width:'100px'}}>
+                <Select style={{width:'100%'}}>
+                    <Option value="1">1</Option>
+                    <Option value="2">2</Option>
+                </Select>
             </div>
         )
     }

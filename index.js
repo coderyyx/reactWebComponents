@@ -55,10 +55,18 @@ class Root extends Component {
     onChange(value){
         console.log(value)
     }
+    
     render () {
+        let pullSelect_props={
+            value:"杨运心",
+            onChange:(value)=>this.onChange(value),
+            conHeight:30,
+            noReturn:false,
+            defautText:'其它操作...'
+        }
         return (
             <div>
-                <PullSelect value="杨运心" onChange={(value)=>this.onChange(value)}>
+                <PullSelect {...pullSelect_props}>
                     <Option eq="1" value="1">y</Option>
                     <Option eq="2" value="2">x</Option>
                 </PullSelect>

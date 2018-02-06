@@ -1,22 +1,35 @@
 import React, { Component } from 'react'
-// import Option from './options.js';
 
+import {Motion, spring} from 'react-motion';
+
+const classNames = require('classnames');
 
 const noop = () => {}
 
-
-class Child extends Component {
-    render () {
-        let {child} = this.props;
-        return (
-            <ul>
-                {child}
-            </ul>
-        )
-    }
+const styles = {
+    menu: {
+      overflow: 'hidden',
+      border: '2px solid #ddd',
+      width: 300,
+      position: 'absolute'
+    },
+    selection: {
+      padding: 10,
+      margin: 0,
+      borderBottom: '1px solid #ededed'
+    },
+    button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex',
+      cursor: 'pointer',
+      width: 200,
+      height: 45,
+      border: 'none',
+      borderRadius: 4,
+      backgroundColor: '#ffc107',
+    },
 }
-
-
 
 class PullSelect extends Component {
     constructor (props, context) {
@@ -25,55 +38,53 @@ class PullSelect extends Component {
             pullTop:true,
             pullType:true,
             value:'',
-            text:''
+            text:'',
+            height:38
         }
     }
     componentWillReceiveProps(nextProps){
 
+    }
+    animate = () => {
+        let length = this.props.children.length;
+        let top = 38*length + styles.selection.padding*length;
+        this.setState((state) => ({ height: state.height === 38 ? top : 38,pullType:!state.pullType }))
     }
     click(event){
         event = event || window.event;
         let {onChange,noReturn,onSelect} = this.props;
         let {nodeName,value,innerText}=event.target;
         nodeName = nodeName.toLowerCase();
+        onChange = onChange ? onChange : noop;
+        onSelect = onSelect ? onSelect : noop;
         if(nodeName === 'div'){
-            this.pullUp();
+            this.animate();
         }else if(nodeName === 'li'){
             /**
              * 是否回填默认值
              */
             if(noReturn){
-                onSelect ? onSelect(value) : noop();
+                onSelect();
                 //收回下拉
-                this.pullUp();
+                this.animate();
                 //
                 return;
             }
-                //触发onChange
+            //回填 && 两次选中不一样
             if(value!=this.state.value){
                 onChange(value);
+                onSelect(value);
                 //收回下拉
-                this.pullUp();
+                this.animate();
                 //回填描述
                 this.setState({value:value,text:innerText});
+            }else{
+                onSelect(value);
+                this.animate();
+                return;
             }
                 
         }
-    }
-    pullUp(){
-        let ms = this.state.pullType ? 450 : 200;
-        console.log(ms)
-        setTimeout(()=>{
-            this.setState({pullType:!this.state.pullType});
-        },ms)
-        this.setState({pullTop:!this.state.pullTop});
-    }
-    getPullTop(conHeight,numbers,pullTop){
-        //下拉高度大于500
-        if(conHeight*numbers>500)
-            return 500;
-        //4px 的距离 可做成可配置
-        return pullTop ? (-conHeight*numbers+'px') : (conHeight+4+'px');
     }
     render () {
         let {pullTop,pullType, text} = this.state;
@@ -93,53 +104,21 @@ class PullSelect extends Component {
         value = defautText ? defautText : text;
         pullTextColor = pullTextColor ? pullTextColor : 'green';
         pullBorderColor = pullBorderColor ? pullBorderColor : 'gray';
-        let overflow  = pullTop ? 'hidden' : 'initial';
-        let length = this.props.children ? this.props.children.length : 1;
-        
-        //设置滚动高度
-        top = this.getPullTop(conHeight,length,pullTop);
-        iconColor = iconColor ? iconColor :'#3da5e7';
-        fontSize = fontSize ? fontSize : '14px';
 
-        let child_props = {
-            child:this.props.children
-        }
-
-        let pullStyle = {
-            transition:'top ' + dropSpeed,
-            top:top,
-            overflowY:top==500?'scroll':'initial',
-            color:pullTextColor,
-            border:'1px solid ' + pullBorderColor
-        }
-
-        let yConStyle = {
-            color:conTextColor,
-            border:'1px solid '+ conBoderColor,
-            height:conHeight-2+'px',
-            lineHeight:conHeight+'px',
-            overflow:overflow
-        }
-
-        let iconStyle = {
-            borderBottom:pullTop ? 'none' : ('8px solid ' + iconColor),
-            borderTop:pullTop ? ('8px solid ' + iconColor) : 'none'
-        }
+        let warpClass = classNames("special-warp",
+            { "arrow-up": pullType ,
+            "arrow-down":!pullType }
+        )
         return (
-            <div className="container" 
-                 style={{overflow:pullType ? 'hidden':'initial'}}
+            <div className={warpClass} 
                  onClick={(e)=>this.click(e)}>
-                <div className="y-con" 
-                    style={yConStyle} 
-                    ref="con">
-                    <div className="defaultText" style={{fontSize:fontSize}}>{value}</div>
-                    <div className={`triangle-${pullTop?'down':'up'}`} style={iconStyle}></div>
-                    
-                </div>
-                <ul className="y-uls" 
-                    style={pullStyle}>
+                <Motion style={{ height: spring(this.state.height) }} >
+                {
+                    ({ height }) => <div style={Object.assign({}, styles.menu, { height } )}>
                         {this.props.children}
-                </ul>
+                  </div>
+                }
+                </Motion>
             </div>
         )
     }

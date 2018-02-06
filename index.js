@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Table from './components/table/index.js';
 // import Select,{Option} from './components/rc-select/index.js';
-import {PullSelect,Option} from './components/pullSelect/index.js';
+import PullSelect from './components/pullSelect/index.js';
 
+import Anima from './components/specialSelect/index';
+
+const Option = PullSelect.Option;
 require('./components/style/index.css');
 import './components/style/select.less';
 // class Root extends Component {
@@ -71,6 +74,7 @@ class Root extends Component {
                     <Option eq="1" value="1">y</Option>
                     <Option eq="2" value="2">x</Option>
                 </PullSelect>
+                
             </div>
         )
     }

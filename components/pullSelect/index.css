@@ -21,13 +21,29 @@ body{
     /* overflow-y: scroll; */
 }
 
-.y-uls li{
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
+.special-warp li{
+        padding: 10px;
+        margin: 0px;
+        border-bottom: 1px solid #ededed;
+        height: 28px;
+        list-style: none;
 }
 
-.y-uls li:hover{
+.arrow-up > div:after{
+    content: '▲';
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    color: gray;
+}
+.arrow-down > div:after{
+    content: '▼';
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    color: gray;
+}
+.special-warp li:hover{
     background-color: #dde8f3;
 }
 .defaultText{

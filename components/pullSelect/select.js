@@ -6,30 +6,6 @@ const classNames = require('classnames');
 
 const noop = () => {}
 
-const styles = {
-    menu: {
-      overflow: 'hidden',
-      border: '2px solid #ddd',
-      width: 300,
-      position: 'absolute'
-    },
-    selection: {
-      padding: 10,
-      margin: 0,
-      borderBottom: '1px solid #ededed'
-    },
-    button: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      display: 'flex',
-      cursor: 'pointer',
-      width: 200,
-      height: 45,
-      border: 'none',
-      borderRadius: 4,
-      backgroundColor: '#ffc107',
-    },
-}
 
 class PullSelect extends Component {
     constructor (props, context) {
@@ -47,7 +23,8 @@ class PullSelect extends Component {
     }
     animate = () => {
         let length = this.props.children.length;
-        let top = 38*length + styles.selection.padding*length;
+        //10默认padding
+        let top = 38*length + 10*length;
         this.setState((state) => ({ height: state.height === 38 ? top : 38,pullType:!state.pullType }))
     }
     click(event){
@@ -90,8 +67,9 @@ class PullSelect extends Component {
         let {pullTop,pullType, text} = this.state;
         let {value,defaultValue,defautText,conBoderColor,conTextColor,conHeight,
             conIconColor,dropSpeed,top ,onChange,onSelect,noReturn,disabled,
-        pullTextColor,pullBorderColor,iconColor,fontSize} = this.props;
+        pullTextColor,pullBorderColor,iconColor,fontSize,width} = this.props;
         
+        width = width ? width : '250';
         conTextColor = conTextColor ?   conTextColor : 'green'; 
         conBoderColor = conBoderColor ?   conBoderColor : 'green'; 
         //容器高度
@@ -114,7 +92,7 @@ class PullSelect extends Component {
                  onClick={(e)=>this.click(e)}>
                 <Motion style={{ height: spring(this.state.height) }} >
                 {
-                    ({ height }) => <div style={Object.assign({}, styles.menu, { height } )}>
+                    ({ height }) => <div style={Object.assign({}, { height ,width} )}>
                         {this.props.children}
                   </div>
                 }

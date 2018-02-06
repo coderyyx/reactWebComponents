@@ -73,6 +73,8 @@ class Root extends Component {
                 <PullSelect {...pullSelect_props}>
                     <Option eq="1" value="1">y</Option>
                     <Option eq="2" value="2">x</Option>
+                    <Option eq="3" value="3">biosan</Option>
+                    <Option eq="4" value="4">bebeanan</Option>
                 </PullSelect>
                 
             </div>

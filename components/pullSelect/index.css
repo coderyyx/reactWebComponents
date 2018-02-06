@@ -25,7 +25,8 @@ body{
         padding: 10px;
         margin: 0px;
         border-bottom: 1px solid #ededed;
-        height: 28px;
+        height: 18px;
+        line-height: 18px;
         list-style: none;
 }
 

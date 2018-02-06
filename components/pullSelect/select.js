@@ -24,7 +24,7 @@ class PullSelect extends Component {
     animate = () => {
         let length = this.props.children.length;
         //10默认padding
-        let top = 38*length + 10*length;
+        let top = 38*length ;
         this.setState((state) => ({ height: state.height === 38 ? top : 38,pullType:!state.pullType }))
     }
     click(event){

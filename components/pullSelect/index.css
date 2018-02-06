@@ -42,6 +42,7 @@ body{
     top: 8px;
     right: 9px;
     color: gray;
+    font-size: 13px;
 }
 .arrow-down > div:after{
     content: '▼';
@@ -49,6 +50,7 @@ body{
     top: 8px;
     right: 9px;
     color: gray;
+    font-size: 13px;
 }
 .special-warp li:hover{
     background-color: #dde8f3;

@@ -15,7 +15,7 @@ class PullSelect extends Component {
             pullType:true,
             value:'',
             text:'',
-            height:38
+            height:this.props.height?this.props.height:38
         }
     }
     componentWillReceiveProps(nextProps){
@@ -23,9 +23,9 @@ class PullSelect extends Component {
     }
     animate = () => {
         let length = this.props.children.length;
-        //10默认padding
-        let top = 38*length ;
-        this.setState((state) => ({ height: state.height === 38 ? top : 38,pullType:!state.pullType }))
+        const stander = this.props.height ? this.props.height : 38;
+        let top = stander * length ;
+        this.setState((state) => ({ height: state.height === stander ? top : stander,pullType:!state.pullType }))
     }
     click(event){
         event = event || window.event;
@@ -42,18 +42,14 @@ class PullSelect extends Component {
              */
             if(noReturn){
                 onSelect();
-                //收回下拉
                 this.animate();
-                //
                 return;
             }
             //回填 && 两次选中不一样
             if(value!=this.state.value){
                 onChange(value);
                 onSelect(value);
-                //收回下拉
                 this.animate();
-                //回填描述
                 this.setState({value:value,text:innerText});
             }else{
                 onSelect(value);
@@ -70,22 +66,16 @@ class PullSelect extends Component {
         pullTextColor,pullBorderColor,iconColor,fontSize,width} = this.props;
         
         width = width ? width : '250';
-        conTextColor = conTextColor ?   conTextColor : 'green'; 
-        conBoderColor = conBoderColor ?   conBoderColor : 'green'; 
-        //容器高度
-        conHeight = conHeight ?   conHeight : '20';
-        //下拉框移动速度 
-        dropSpeed = dropSpeed ?   dropSpeed : '1s'; 
         /**
          * 默认文案
          */
         value = defautText ? defautText : text;
-        pullTextColor = pullTextColor ? pullTextColor : 'green';
-        pullBorderColor = pullBorderColor ? pullBorderColor : 'gray';
 
         let warpClass = classNames("special-warp",
-            { "arrow-up": pullType ,
-            "arrow-down":!pullType }
+            { 
+                "arrow-up": pullType ,
+                "arrow-down":!pullType
+             }
         )
         return (
             <div className={warpClass} 

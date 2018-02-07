@@ -31,6 +31,7 @@ class PullSelect extends Component {
         event = event || window.event;
         let {onChange,noReturn,onSelect} = this.props;
         let {nodeName,value,innerText}=event.target;
+        console.log(value);
         nodeName = nodeName.toLowerCase();
         onChange = onChange ? onChange : noop;
         onSelect = onSelect ? onSelect : noop;
